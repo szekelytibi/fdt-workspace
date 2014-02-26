@@ -15,7 +15,7 @@
 	Using a reverse DNS-style name as the id is recommended. (Eg. com.example.ExampleApplication.) Required. -->
   <id>com.powerflasher.SampleApp</id>
   <!-- Used as the filename for the application. Required. -->
-  <filename>test1</filename>
+  <filename>shotemup</filename>
   <!-- The name that is displayed in the AIR application installer. 
 	May have multiple values for each language. See samples or xsd schema file. Optional. -->
   <name>My Application</name>
@@ -36,7 +36,7 @@
   <initialWindow>
     <!-- The main SWF or HTML file of the application. Required. -->
     <!-- Note: In Flash Builder, the SWF reference is set automatically. -->
-    <content>test1.swf</content>
+    <content>shotEmUp.swf</content>
     <!-- The title of the main window. Optional. -->
     <!-- <title></title> -->
     <!-- The type of system chrome to use (either "standard" or "none"). Optional. Default standard. -->
