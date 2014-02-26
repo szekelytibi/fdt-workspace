@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<launchConfiguration type="com.powerflasher.fdt.ui.CompcGroup">
+<booleanAttribute key="ADVANCED_TELEMTRY" value="false"/>
+<stringAttribute key="ARGUMENTS" value=" -target-player={playerVersion}"/>
+<listAttribute key="COMPILER_CONSTANTS"/>
+<stringAttribute key="COMPILER_TECHNOLOGY" value="Flex SDK"/>
+<stringAttribute key="LAUNCHER_DEPENDENCIES" value="[Self]"/>
+<stringAttribute key="OUTPUT" value="bin/test1.swc"/>
+<booleanAttribute key="PASS_CP" value="true"/>
+<booleanAttribute key="PASS_DEFINES" value="true"/>
+<booleanAttribute key="PASS_EXTERNS" value="true"/>
+<booleanAttribute key="PASS_RSLS" value="false"/>
+<booleanAttribute key="PASS_SWCS" value="true"/>
+<stringAttribute key="PROJECT_NAME" value="shotEmUp"/>
+<listAttribute key="org.eclipse.debug.core.MAPPED_RESOURCE_PATHS">
+<listEntry value="/shotEmUp"/>
+</listAttribute>
+<listAttribute key="org.eclipse.debug.core.MAPPED_RESOURCE_TYPES">
+<listEntry value="4"/>
+</listAttribute>
+<booleanAttribute key="org.eclipse.debug.ui.ATTR_LAUNCH_IN_BACKGROUND" value="false"/>
+<listAttribute key="org.eclipse.debug.ui.favoriteGroups">
+<listEntry value="org.eclipse.debug.ui.launchGroup.profile"/>
+<listEntry value="org.eclipse.debug.ui.launchGroup.debug"/>
+<listEntry value="org.eclipse.debug.ui.launchGroup.run"/>
+</listAttribute>
+</launchConfiguration>
