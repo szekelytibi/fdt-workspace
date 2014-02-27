@@ -6,7 +6,7 @@ package com.powerflasher.SampleApp {
 	import flash.display.AVM1Movie;
 	import flash.net.URLRequest;
 	import flash.events.Event;
-//	import flash.desktop.NativeApplication;
+	import flash.desktop.NativeApplication;
 	import flash.system.fscommand;
 	import flash.media.SoundMixer;
 	import flash.media.SoundTransform;
@@ -86,6 +86,7 @@ package com.powerflasher.SampleApp {
 		private function onSelectExit (e:MouseEvent):void {
 			closeMenu();
 			fscommand("quit");
+			NativeApplication.nativeApplication.exit(0);
 		}
 		
 		private function closeMenu():void{
