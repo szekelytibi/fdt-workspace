@@ -12,7 +12,7 @@ package com.powerflasher.SampleApp {
 		public function Game(level:int, stage:Stage) {
 			mainStage = stage;
 			gameLevel = level;
-			spaceShip = new SpaceShip();
+			spaceShip = new SpaceShip(mainStage);
 			mainStage.addChild(spaceShip);
 		}
 	}

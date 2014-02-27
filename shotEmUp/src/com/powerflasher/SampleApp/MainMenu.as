@@ -97,8 +97,6 @@ package com.powerflasher.SampleApp {
 		
 		private function closeMenu():void{
 			SoundMixer.soundTransform = new SoundTransform(0, 0);
-			trace(SoundMixer.audioPlaybackMode);
-			trace(introMovie.contentLoaderInfo.contentType);
 			
 			this.stage.removeChild(introMovie);
 			this.stage.removeChild(button0);

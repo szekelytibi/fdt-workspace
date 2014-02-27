@@ -14,9 +14,9 @@ package com.powerflasher.SampleApp {
 	public class Main extends Sprite {
 		private var titleImage:Loader;
 		private var mainMenu:MainMenu;
-		private const fadeAmount:int = 50;
+		private const fadeAmount:int = 25;
 		private const titleAmount:int = 300;
-		private var titleTimer:Timer = new Timer(5, titleAmount);
+		private var titleTimer:Timer = new Timer(10, titleAmount);
 		private var fadeCount:int = 0;
 		public function Main() {
 			titleImage = new Loader();
@@ -37,13 +37,17 @@ package com.powerflasher.SampleApp {
 		
 		private function timerHandler(e:TimerEvent):void{
 			fadeCount++;
-			if(fadeCount < fadeAmount)
+			if(fadeCount <= fadeAmount){
 				titleImage.alpha = fadeCount / fadeAmount;
+			}
 			else if((titleAmount-fadeAmount) <= fadeCount ){
 				titleImage.alpha = (titleAmount-fadeCount) / fadeAmount;
 			}
 			else
 				titleImage.alpha = 1;
+				
+//			trace(fadeCount, titleImage.alpha);
+				
 				
 			e.updateAfterEvent();
         }
