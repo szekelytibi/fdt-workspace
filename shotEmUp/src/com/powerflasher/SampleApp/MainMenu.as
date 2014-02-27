@@ -9,6 +9,7 @@ package com.powerflasher.SampleApp {
 //	import flash.desktop.NativeApplication;
 	import flash.system.fscommand;
 	import flash.media.SoundMixer;
+	import flash.media.SoundTransform;
 	
 
 	/**
@@ -67,8 +68,7 @@ package com.powerflasher.SampleApp {
 			this.stage.addChild(button2);
 			this.stage.addChild(buttonExit);
 			
-			SoundMixer.soundTransform.volume = 0.1;
-			
+			SoundMixer.soundTransform = new SoundTransform(0.1, 0);;			
 		}
 		
 		private function onSelectGame0 (e:MouseEvent):void {
@@ -89,7 +89,9 @@ package com.powerflasher.SampleApp {
 		}
 		
 		private function closeMenu():void{
-			SoundMixer.soundTransform.volume = 0;
+			SoundMixer.soundTransform = new SoundTransform(0, 0);
+			trace(SoundMixer.audioPlaybackMode);
+			trace(introMovie.contentLoaderInfo.contentType);
 			
 			this.stage.removeChild(introMovie);
 			this.stage.removeChild(button0);
