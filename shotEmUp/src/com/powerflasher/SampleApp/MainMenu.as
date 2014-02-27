@@ -22,6 +22,7 @@ package com.powerflasher.SampleApp {
 		private var buttonExit:MenuButton;
 		private var introMovie:Loader;
 		private var mainStage:Stage;
+		private var game:Game;
 		
 		public function MainMenu(stage:Stage) {
 			mainStage = stage;
@@ -60,27 +61,32 @@ package com.powerflasher.SampleApp {
 		private function completeListener (e:Event):void {
 			introMovie.width = mainStage.stageWidth;
 			introMovie.height = mainStage.stageHeight;
-			
-			
+				
 			this.stage.addChild(introMovie);
 			this.stage.addChild(button0);
 			this.stage.addChild(button1);
 			this.stage.addChild(button2);
 			this.stage.addChild(buttonExit);
 			
-			SoundMixer.soundTransform = new SoundTransform(0.1, 0);;			
+			SoundMixer.soundTransform = new SoundTransform(0.005, 0);;			
 		}
 		
 		private function onSelectGame0 (e:MouseEvent):void {
 			closeMenu();
+			game = new Game(1, mainStage);
+			mainStage.addChild(game);
 		}
 		
 		private function onSelectGame1 (e:MouseEvent):void {
 			closeMenu();
+			game = new Game(2, mainStage);
+			mainStage.addChild(game);
 		}
 		
 		private function onSelectGame2 (e:MouseEvent):void {
 			closeMenu();
+			game = new Game(3, mainStage);
+			mainStage.addChild(game);
 		}
 		
 		private function onSelectExit (e:MouseEvent):void {

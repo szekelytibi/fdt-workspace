@@ -10,10 +10,14 @@ package com.powerflasher.SampleApp {
 	/**
 	 * @author tiborszekely
 	 */
+	[SWF( frameRate="30", backgroundColor="0x000000", width="800", height="600" )]
 	public class Main extends Sprite {
 		private var titleImage:Loader;
 		private var mainMenu:MainMenu;
-		private var titleTimer:Timer = new Timer(20, 100);
+		private const fadeAmount:int = 50;
+		private const titleAmount:int = 300;
+		private var titleTimer:Timer = new Timer(5, titleAmount);
+		private var fadeCount:int = 0;
 		public function Main() {
 			titleImage = new Loader();
 			titleImage.load(new URLRequest("Title.gif"));
@@ -24,6 +28,7 @@ package com.powerflasher.SampleApp {
         	dispatchEvent(new Event(Event.COMPLETE));
 			titleImage.width = this.stage.stageWidth;
 			titleImage.height = this.stage.stageHeight;
+			titleImage.alpha = 0;
 			this.stage.addChild(titleImage);
 			titleTimer.start();
 			titleTimer.addEventListener(TimerEvent.TIMER, timerHandler);
@@ -31,13 +36,20 @@ package com.powerflasher.SampleApp {
 		}
 		
 		private function timerHandler(e:TimerEvent):void{
-			//trace(e);
+			fadeCount++;
+			if(fadeCount < fadeAmount)
+				titleImage.alpha = fadeCount / fadeAmount;
+			else if((titleAmount-fadeAmount) <= fadeCount ){
+				titleImage.alpha = (titleAmount-fadeCount) / fadeAmount;
+			}
+			else
+				titleImage.alpha = 1;
+				
 			e.updateAfterEvent();
         }
 
         private function completeHandler(e:TimerEvent):void {
 			this.stage.removeChild(titleImage);
-			trace(e);
 			mainMenu = new MainMenu(this.stage);
 			this.stage.addChild(mainMenu);
         }
