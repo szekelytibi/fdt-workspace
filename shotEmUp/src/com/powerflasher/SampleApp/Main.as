@@ -15,7 +15,7 @@ package com.powerflasher.SampleApp {
 		private var titleImage:Loader;
 		private var mainMenu:MainMenu;
 		private const fadeAmount:int = 25;
-		private const titleAmount:int = 300;
+		private const titleAmount:int = 100;
 		private var titleTimer:Timer = new Timer(10, titleAmount);
 		private var fadeCount:int = 0;
 		public function Main() {

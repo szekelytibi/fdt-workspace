@@ -9,9 +9,13 @@ package com.powerflasher.SampleApp {
 		public var gameLevel:int;
 		private var mainStage:Stage;
 		private var spaceShip:SpaceShip;
+		private var asteroidField:AsteroidField;
 		public function Game(level:int, stage:Stage) {
 			mainStage = stage;
 			gameLevel = level;
+			trace(level);
+			asteroidField = new AsteroidField(mainStage);
+			mainStage.addChild(asteroidField);
 			spaceShip = new SpaceShip(mainStage);
 			mainStage.addChild(spaceShip);
 		}
