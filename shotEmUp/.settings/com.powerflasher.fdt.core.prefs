@@ -30,7 +30,7 @@ com.powerflasher.fdt.core.mobile.AirDesktop.ICON.PATH.36x36=
 com.powerflasher.fdt.core.mobile.AirDesktop.ICON.PATH.48x48=
 com.powerflasher.fdt.core.mobile.AirDesktop.ICON.PATH.72x72=
 com.powerflasher.fdt.core.mobile.AirDesktop.MOBILE.DESCRIPTOR=bin/shotEmUp-app.xml
-com.powerflasher.fdt.core.mobile.AirDesktop.PACKAGE.CONTENT=bin/shotEmUp-app.xml > shotEmUp-app.xml;bin/shotEmUp.swf > shotEmUp.swf;
+com.powerflasher.fdt.core.mobile.AirDesktop.PACKAGE.CONTENT=bin/shotEmUp-app.xml > shotEmUp-app.xml;bin/shotEmUp.swf > shotEmUp.swf
 com.powerflasher.fdt.core.mobile.AirDesktop.SIGNATURE.CERTIFICATE=
 com.powerflasher.fdt.core.mobile.AirDesktop.SIGNATURE.PWD=HZsdm2UDN/4\=
 com.powerflasher.fdt.core.mobile.AirDesktop.SIGNATURE.REMEMBER.PWD=false
@@ -50,7 +50,7 @@ com.powerflasher.fdt.core.mobile.Android.ICON.PATH.48x48=
 com.powerflasher.fdt.core.mobile.Android.ICON.PATH.72x72=
 com.powerflasher.fdt.core.mobile.Android.ICON.PATH.96x96=
 com.powerflasher.fdt.core.mobile.Android.MOBILE.DESCRIPTOR=bin/shotEmUp-app.xml
-com.powerflasher.fdt.core.mobile.Android.PACKAGE.CONTENT=bin/shotEmUp-app.xml > shotEmUp-app.xml;bin/test1.swf > test1.swf;
+com.powerflasher.fdt.core.mobile.Android.PACKAGE.CONTENT=bin/shotEmUp-app.xml > shotEmUp-app.xml;bin/test1.swf > test1.swf
 com.powerflasher.fdt.core.mobile.Android.SIGNATURE.CERTIFICATE=
 com.powerflasher.fdt.core.mobile.Android.SIGNATURE.PWD=HZsdm2UDN/4\=
 com.powerflasher.fdt.core.mobile.Android.SIGNATURE.REMEMBER.PWD=false
@@ -82,7 +82,7 @@ com.powerflasher.fdt.core.mobile.iOS.ICON.PATH.72x72=
 com.powerflasher.fdt.core.mobile.iOS.ICON.PATH.76x76=
 com.powerflasher.fdt.core.mobile.iOS.ICON.PATH.80x80=
 com.powerflasher.fdt.core.mobile.iOS.MOBILE.DESCRIPTOR=bin/shotEmUp-app.xml
-com.powerflasher.fdt.core.mobile.iOS.PACKAGE.CONTENT=bin/shotEmUp-app.xml > shotEmUp-app.xml;bin/test1.swf > test1.swf;
+com.powerflasher.fdt.core.mobile.iOS.PACKAGE.CONTENT=bin/shotEmUp-app.xml > shotEmUp-app.xml;bin/test1.swf > test1.swf
 com.powerflasher.fdt.core.mobile.iOS.SIGNATURE.CERTIFICATE=
 com.powerflasher.fdt.core.mobile.iOS.SIGNATURE.CERTIFICATE.RELEASE=
 com.powerflasher.fdt.core.mobile.iOS.SIGNATURE.PROVISIONING.FILE=
