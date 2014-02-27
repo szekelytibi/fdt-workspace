@@ -1,6 +1,5 @@
 package com.powerflasher.SampleApp {
 	import flash.events.Event;
-	import mx.states.AddChild;
 	import flash.display.Sprite;
 	import flash.display.Loader;
 	import flash.net.URLRequest;
@@ -14,7 +13,7 @@ package com.powerflasher.SampleApp {
 	public class Main extends Sprite {
 		private var titleImage:Loader;
 		private var mainMenu:MainMenu;
-		private var titleTimer:Timer = new Timer(200, 10);
+		private var titleTimer:Timer = new Timer(20, 100);
 		public function Main() {
 			titleImage = new Loader();
 			titleImage.load(new URLRequest("Title.gif"));
