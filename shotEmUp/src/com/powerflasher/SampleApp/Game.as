@@ -9,6 +9,7 @@ package com.powerflasher.SampleApp {
 		public var gameLevel:int;
 		private var mainStage:Stage;
 		private var spaceShip:SpaceShip;
+		private var enemy:Enemy;
 		private var asteroidField0:AsteroidField;
 		private var asteroidField1:AsteroidField;
 		private var asteroidField2:AsteroidField;
@@ -30,6 +31,8 @@ package com.powerflasher.SampleApp {
 			
 			asteroidField2 = new AsteroidField(4, 10, mainStage, null);
 			mainStage.addChild(asteroidField2);
+			
+			enemy = new Enemy(mainStage);
 		}
 	}
 }
