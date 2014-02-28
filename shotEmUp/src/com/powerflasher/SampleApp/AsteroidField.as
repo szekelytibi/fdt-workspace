@@ -1,66 +1,59 @@
 package com.powerflasher.SampleApp {
 	import flash.net.URLRequest;
-	import mx.core.Container;
-	import flash.display.Loader;
 	import flash.display.Stage;
 	import flash.events.Event;
-	import flash.events.ErrorEvent;
-    import flash.events.UncaughtErrorEvent;
 	import flash.display.Sprite;
 
 	/**
 	 * @author tiborszekely
 	 */
 	public class AsteroidField extends Sprite {
-		private var asteroids:Vector.<Loader>;
+		private var asteroids:Vector.<Asteroid>;
 		private var mainStage:Stage;
 		private var loadedAsteroids:int = 0;
-		private var asteroid0:Loader; 
-		private var asteroid1:Loader; 
-		public function AsteroidField(stage:Stage) {
-			trace(this);
+		private var loadingDoneCallback:Function;
+		public var scrollSpeed:Number = 0;
+		private var fieldSize:Number;
+		private var scrollOffset:Number = 0;
+		public function AsteroidField(areaMul:Number, speed:Number, stage:Stage, callback:Function = null) {
 			mainStage = stage;
+			fieldSize = mainStage.stageWidth * areaMul;
+			scrollSpeed = speed;
+			loadingDoneCallback = callback;
 			var urls:Vector.<URLRequest> = Vector.<URLRequest>([new URLRequest("Asteroid0.gif"),new URLRequest("Asteroid1.gif"), new URLRequest("Asteroid2.gif"), new URLRequest("Asteroid3.gif"), new URLRequest("Asteroid4.gif"), new URLRequest("Asteroid5.gif"), new URLRequest("Asteroid6.gif"), new URLRequest("Asteroid7.gif"), new URLRequest("Asteroid8.gif"), new URLRequest("Asteroid9.gif")]);
-			asteroids = new Vector.<Loader>();
+//			var urls:Vector.<URLRequest> = Vector.<URLRequest>([new URLRequest("Asteroid0.gif")]);
+			asteroids = new Vector.<Asteroid>();
 			var i:int = 0;
-			
+			var fieldOffset:Number = mainStage.stageWidth;
+			loadedAsteroids = 0;
 			for each (var url:URLRequest in urls){
-				asteroids[i] = new Loader();
+				asteroids[i] = new Asteroid(fieldOffset, fieldSize);
 				asteroids[i].load(url);
 				asteroids[i].contentLoaderInfo.addEventListener(Event.COMPLETE, completeListener);
 				i++;
+			}
+			addEventListener(Event.ENTER_FRAME,enterFrameHandler);
+		}
+		
+		protected function enterFrameHandler(event:Event):void{
+			scrollOffset += scrollSpeed;
+							
+			for each(var asteroid:Asteroid in asteroids){
+				asteroid.setOffset(-scrollOffset);
 			}
 		}
 		
 		private function completeListener (e:Event):void {
 			loadedAsteroids++;
 			if(loadedAsteroids == asteroids.length){
-				trace("ALL LOADED");
-				for each(var asteroid:Loader in asteroids){
+				for each(var asteroid:Asteroid in asteroids){
 					mainStage.addChild(asteroid);
-					asteroid.x = Math.random() * mainStage.stageWidth;
-					asteroid.y = Math.random() * mainStage.stageHeight;
+					asteroid.initPosition(Math.random() * fieldSize, Math.random() * mainStage.stageHeight);
+					if(loadingDoneCallback != null)
+						loadingDoneCallback();
 				}
 			}
 			dispatchEvent(new Event(Event.COMPLETE));
 		}
-		
-		private function uncaughtErrorHandler(event:UncaughtErrorEvent):void{
-			trace("ERROR:", event);
-            if (event.error is Error)
-            {
-                var error:Error = event.error as Error;
-                // do something with the error
-            }
-            else if (event.error is ErrorEvent)
-            {
-                var errorEvent:ErrorEvent = event.error as ErrorEvent;
-                // do something with the error
-            }
-            else
-            {
-                // a non-Error, non-ErrorEvent type was thrown and uncaught
-            }
-        }
 	}
 }
