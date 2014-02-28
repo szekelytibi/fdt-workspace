@@ -49,9 +49,9 @@ package com.powerflasher.SampleApp {
 				for each(var asteroid:Asteroid in asteroids){
 					mainStage.addChild(asteroid);
 					asteroid.initPosition(Math.random() * fieldSize, Math.random() * mainStage.stageHeight);
-					if(loadingDoneCallback != null)
-						loadingDoneCallback();
 				}
+				if(loadingDoneCallback != null)
+					loadingDoneCallback();
 			}
 			dispatchEvent(new Event(Event.COMPLETE));
 		}
