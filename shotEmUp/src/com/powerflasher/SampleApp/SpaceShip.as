@@ -12,14 +12,15 @@ package com.powerflasher.SampleApp {
 	 * @author tiborszekely
 	 */
 	public class SpaceShip extends Sprite {
-		private var spaceShip : Loader;
 		private var numAssets : int = 1;
-		private var mainStage:Stage;
 		
+		public var spaceShip : Loader;
+		public var mainStage:Stage;
 		public var up:Boolean = false;
 		public var down:Boolean = false;
 		public var left:Boolean = false;
 		public var right:Boolean = false;
+		public var fire:Boolean = false;
 		
 		// Animation
 		public var speed:Number = 10;
@@ -48,6 +49,10 @@ package com.powerflasher.SampleApp {
 		
 		protected function enterFrameHandler(event:Event):void
 		{
+			if(fire){
+				var missile:Missile = new Missile(this);
+				fire = false;
+			}
 			// Move up, down, left, or right
 			if( left && !right ) {
 				spaceShip.x -= speed;
@@ -101,6 +106,10 @@ package com.powerflasher.SampleApp {
 				case Keyboard.RIGHT:
 					right = true;
 					break;
+					
+				case Keyboard.SPACE:
+					fire = true;
+					break;
 			}
 		}
 		
@@ -123,6 +132,10 @@ package com.powerflasher.SampleApp {
 				case Keyboard.RIGHT:
 					right = false;
 					break;
+				case Keyboard.SPACE:
+					fire = false;
+					break;
+					
 			}
 		}
 	}
