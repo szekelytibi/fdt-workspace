@@ -14,6 +14,7 @@ package com.powerflasher.SampleApp {
 		private var initialX:int;
 		private var initialY:int;
 		private const speed:int = 20;
+		private var explosion:Explosion;
 		public function Missile(_emitter:SpaceShip) {
 			this.emitter = _emitter;
 			missile = new Loader();
@@ -43,7 +44,7 @@ package com.powerflasher.SampleApp {
 					var index:int = Enemy.hitObjs.indexOf(enemy);
 					Enemy.hitObjs.splice(index, 1);
 					destroyMissile = true;
-					
+					explosion = new Explosion(emitter.mainStage, missile.x, missile.y, 100, 10);
 					if(Enemy.hitObjs.length ==0){
 						trace("CONGRATULATION !");
 						// WIN GAME ....

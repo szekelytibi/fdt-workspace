@@ -17,9 +17,9 @@ package com.powerflasher.SampleApp {
 		private var nextTargetTime:Number;
 		private var moveSpeed:Number;
 		private var curTargetTime:Number;
+		private var pos:Vector2;
 		private var force:Vector2 = Vector2.Zero;
 		private var speed:Vector2 = Vector2.Zero;
-		private var pos:Vector2;
 		private var frameTime:Number = 0;
 		private var attractiveDynamicPoints:Vector.<Loader> = new Vector.<Loader>();
 		private var attractiveStaticPoints:Vector.<Vector2> = new Vector.<Vector2>();
@@ -70,7 +70,7 @@ package com.powerflasher.SampleApp {
 		}
 		
 		private function calcForce():void{
-			const massOtherDynamic:Number = 500; 
+			const massOtherDynamic:Number = 5000; 
 			for each(var point:Loader in attractiveDynamicPoints){
 				var pOther:Vector2 = new Vector2(point.x, point.y);
 				var dir:Vector2 = pOther.minus(pos);
@@ -127,7 +127,7 @@ package com.powerflasher.SampleApp {
 			//moveToTarget();
 			//curTargetTime += moveSpeed;
 		
-			//calcForce();
+			calcForce();
 			setNewTarget = calcStaticForce();
 			calcSpeed(dt);
 			calcPos(dt);
