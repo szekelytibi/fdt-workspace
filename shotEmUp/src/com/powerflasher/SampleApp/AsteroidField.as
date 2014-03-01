@@ -15,7 +15,9 @@ package com.powerflasher.SampleApp {
 		public var scrollSpeed:Number = 0;
 		private var fieldSize:Number;
 		private var scrollOffset:Number = 0;
-		public function AsteroidField(areaMul:Number, speed:Number, stage:Stage, callback:Function = null) {
+		private var scale:Number;
+		public function AsteroidField(areaMul:Number, speed:Number, _scale:Number, stage:Stage, callback:Function = null) {
+			scale = _scale;
 			mainStage = stage;
 			fieldSize = mainStage.stageWidth * areaMul;
 			scrollSpeed = speed;
@@ -48,7 +50,7 @@ package com.powerflasher.SampleApp {
 			if(loadedAsteroids == asteroids.length){
 				for each(var asteroid:Asteroid in asteroids){
 					mainStage.addChild(asteroid);
-					asteroid.initPosition(Math.random() * fieldSize, Math.random() * mainStage.stageHeight);
+					asteroid.initPosition(Math.random() * fieldSize, Math.random() * mainStage.stageHeight, scale);
 				}
 				if(loadingDoneCallback != null)
 					loadingDoneCallback();

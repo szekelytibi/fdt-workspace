@@ -13,10 +13,12 @@ package com.powerflasher.SampleApp {
 			this.baseOffset = _baseOffset;
 		}
 		
-		public function initPosition( _x:int, _y:int):void{
+		public function initPosition( _x:int, _y:int, _scale:Number = 1):void{
 			posX = _x;
 			this.x = _x+baseOffset;
 			this.y = _y;
+			this.width *= _scale;
+			this.height *= _scale;
 		}
 		
 		public function setOffset(offset:Number):void{

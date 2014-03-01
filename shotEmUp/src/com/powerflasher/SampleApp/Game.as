@@ -16,12 +16,12 @@ package com.powerflasher.SampleApp {
 		public function Game(level:int, stage:Stage) {
 			mainStage = stage;
 			gameLevel = level;
-			asteroidField0 = new AsteroidField(2, 4, mainStage, asteroidLayer0Loaded);
+			asteroidField0 = new AsteroidField(2, 4, 1, mainStage, asteroidLayer0Loaded);
 			mainStage.addChild(asteroidField0);
 		}
 		
 		private function asteroidLayer0Loaded():void{
-			asteroidField1 = new AsteroidField(2, 6, mainStage, asteroidLayer1Loaded);
+			asteroidField1 = new AsteroidField(2, 6, 1, mainStage, asteroidLayer1Loaded);
 			mainStage.addChild(asteroidField1);
 		}
 		
@@ -29,10 +29,10 @@ package com.powerflasher.SampleApp {
 			spaceShip = new SpaceShip(mainStage);
 			mainStage.addChild(spaceShip);
 			
-			asteroidField2 = new AsteroidField(4, 10, mainStage, null);
+			asteroidField2 = new AsteroidField(8, 40, 4, mainStage, null);
 			mainStage.addChild(asteroidField2);
 			
-			enemy = new Enemy(mainStage);
+			enemy = new Enemy(mainStage, spaceShip);
 		}
 	}
 }
