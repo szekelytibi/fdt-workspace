@@ -30,6 +30,8 @@ package com.powerflasher.SampleApp {
 		private const PI2:Number = 3.1415926536*2;
 		public const mass:Number = 100;
 		
+		public static var hitObjs:Vector.<Loader>=new Vector.<Loader>();
+		
 		public function Enemy(stage:Stage, ship:SpaceShip, shapeRadius:int, shapeElementId:Number) {
 			id = shapeElementId;
 			radius = shapeRadius;
@@ -41,6 +43,24 @@ package com.powerflasher.SampleApp {
 			attractiveStaticPoint = new Vector2(mainStage.stageWidth/2, mainStage.stageHeight/2);
 		}
 		
+		private function completeListener (e:Event):void {
+        	dispatchEvent(new Event(Event.COMPLETE));
+			var scale:Number = 0.2;//Math.random();
+			enemy.width = enemy.width * scale;
+			enemy.height = enemy.height * scale;
+			var dPos:Vector2 = new Vector2(radius, radius).rotateEqual(PI2*id);
+			pos = new Vector2((mainStage.stageWidth-enemy.width) - radius, (mainStage.stageHeight-enemy.height)/2);
+			pos.plusEquals(dPos);
+			enemy.x = pos.X;
+			enemy.y = pos.Y;
+			setRandomTarget();
+			mainStage.addChild(enemy);
+			hitObjs.push(enemy);
+			addAttractiveDynamicPoint(spaceShip);
+			addEventListener(Event.ENTER_FRAME,enterFrameHandler);
+		}
+		
+		
 		public function addAttractiveDynamicPoint(point:Loader):void{
 			attractiveDynamicPoints.push(point);
 		}
@@ -48,7 +68,6 @@ package com.powerflasher.SampleApp {
 		public function addAttractiveStaticPoint(point:Vector2):void{
 			attractiveStaticPoints.push(point);
 		}
-		
 		
 		private function calcForce():void{
 			const massOtherDynamic:Number = 500; 
@@ -99,22 +118,6 @@ package com.powerflasher.SampleApp {
 			nextTargetY = Math.random() * (mainStage.stageHeight-enemy.height);
 			moveSpeed = 1;
 			curTargetTime = 0;
-		}
-		
-		private function completeListener (e:Event):void {
-        	dispatchEvent(new Event(Event.COMPLETE));
-			var scale:Number = 0.2;//Math.random();
-			enemy.width = enemy.width * scale;
-			enemy.height = enemy.height * scale;
-			var dPos:Vector2 = new Vector2(radius, radius).rotateEqual(PI2*id);
-			pos = new Vector2((mainStage.stageWidth-enemy.width) - radius, (mainStage.stageHeight-enemy.height)/2);
-			pos.plusEquals(dPos);
-			enemy.x = pos.X;
-			enemy.y = pos.Y;
-			setRandomTarget();
-			mainStage.addChild(enemy);
-			addAttractiveDynamicPoint(spaceShip);
-			addEventListener(Event.ENTER_FRAME,enterFrameHandler);
 		}
 		
 		protected function enterFrameHandler(event:Event):void{

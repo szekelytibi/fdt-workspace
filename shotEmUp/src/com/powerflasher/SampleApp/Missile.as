@@ -34,6 +34,15 @@ package com.powerflasher.SampleApp {
 		
 		protected function enterFrameHandler(event:Event):void{
 			missile.x += speed;
+			for each(var enemy:Loader in Enemy.hitObjs) {     
+       			if (missile.hitTestObject(enemy)) {
+					trace(enemy.name, Enemy.hitObjs.length);
+					emitter.mainStage.removeChild(enemy);
+					var index:int = Enemy.hitObjs.indexOf(enemy);
+					Enemy.hitObjs.splice(index, 1);
+        		}
+    		}
+			
 			if(emitter.mainStage.stageWidth < missile.x){
 				emitter.mainStage.removeChild(missile);
 				removeEventListener(Event.ENTER_FRAME, enterFrameHandler);

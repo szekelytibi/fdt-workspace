@@ -73,19 +73,19 @@ package com.powerflasher.SampleApp {
 		
 		private function onSelectGame0 (e:MouseEvent):void {
 			closeMenu();
-			game = new Game(1, mainStage);
+			game = new Game(0, mainStage);
 			mainStage.addChild(game);
 		}
 		
 		private function onSelectGame1 (e:MouseEvent):void {
 			closeMenu();
-			game = new Game(2, mainStage);
+			game = new Game(1, mainStage);
 			mainStage.addChild(game);
 		}
 		
 		private function onSelectGame2 (e:MouseEvent):void {
 			closeMenu();
-			game = new Game(3, mainStage);
+			game = new Game(2, mainStage);
 			mainStage.addChild(game);
 		}
 		

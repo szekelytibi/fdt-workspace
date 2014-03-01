@@ -13,6 +13,7 @@ package com.powerflasher.SampleApp {
 		private var asteroidField0:AsteroidField;
 		private var asteroidField1:AsteroidField;
 		private var asteroidField2:AsteroidField;
+		
 		public function Game(level:int, stage:Stage) {
 			mainStage = stage;
 			gameLevel = level;
@@ -31,10 +32,20 @@ package com.powerflasher.SampleApp {
 			
 			asteroidField2 = new AsteroidField(8, 40, 4, mainStage, null);
 			mainStage.addChild(asteroidField2);
-			
-			createEnemies(6, 60);
+			switch(gameLevel){
+				case 0:
+					createEnemies(3, 60);
+					break;
+				case 1:
+					createEnemies(9, 80);
+					break;
+				case 2:
+					createEnemies(6, 60);
+					createEnemies(10, 120);
+					break;
+			}
 		}
-		private function createEnemies(numEnemies:int, shapeRadius:int){
+		private function createEnemies(numEnemies:int, shapeRadius:int):void{
 			for(var i:int = 0; i < numEnemies; i++){
 				var enemy:Enemy = new Enemy(mainStage, spaceShip, shapeRadius,  i / numEnemies);
 				enemies.push(enemy);
