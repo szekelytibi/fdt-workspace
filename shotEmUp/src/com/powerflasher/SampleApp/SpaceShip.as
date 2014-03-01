@@ -1,5 +1,6 @@
 package com.powerflasher.SampleApp {
 
+	import flash.utils.getTimer;
 	import flash.display.Sprite;
 	import flash.display.Loader;
 	import flash.display.Stage;
@@ -21,6 +22,8 @@ package com.powerflasher.SampleApp {
 		public var left:Boolean = false;
 		public var right:Boolean = false;
 		public var fire:Boolean = false;
+		private var lastFireTime:Number = 0;
+		private const fireChargeTime:Number = 500;
 		
 		// Animation
 		public var speed:Number = 10;
@@ -52,7 +55,8 @@ package com.powerflasher.SampleApp {
 		
 		protected function enterFrameHandler(event:Event):void
 		{
-			if(fire){
+			if(fire && ((lastFireTime+fireChargeTime) < getTimer())){
+				lastFireTime = getTimer();
 				var missile:Missile = new Missile(this);
 				fire = false;
 			}
