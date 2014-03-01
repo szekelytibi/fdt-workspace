@@ -84,9 +84,7 @@ package com.powerflasher.SampleApp {
 			if(pos.X < 0 || pos.Y < 0 || mainStage.stageWidth < pos.X || mainStage.stageHeight < pos.Y){
 				speed.X = 0;
 				speed.Y = 0;
-				force.X = 0;
-				force.Y = 0;
-				trace(pos);
+				force.multEquals(0.1);
 			}
 		}
 		
@@ -100,7 +98,7 @@ package com.powerflasher.SampleApp {
 		
 		private function completeListener (e:Event):void {
         	dispatchEvent(new Event(Event.COMPLETE));
-			var scale:Number = Math.random();
+			var scale:Number = 0.2;//Math.random();
 			enemy.width = enemy.width * scale;
 			enemy.height = enemy.height * scale;
 			pos = new Vector2(mainStage.stageWidth-enemy.width, (mainStage.stageHeight-enemy.height)/2);
@@ -110,17 +108,6 @@ package com.powerflasher.SampleApp {
 			mainStage.addChild(enemy);
 			addAttractiveDynamicPoint(spaceShip);
 			addEventListener(Event.ENTER_FRAME,enterFrameHandler);
-		}
-		
-		private function moveToTarget():void{
-			if(nextTargetTime <= curTargetTime){
-				setRandomTarget();
-			}
-			else{
-				var factor:Number = curTargetTime/nextTargetTime; 
-			    enemy.x = enemy.x * (1-factor) + nextTargetX * factor;  
-			    enemy.y = enemy.y * (1-factor) + nextTargetY * factor;  
-			}
 		}
 		
 		protected function enterFrameHandler(event:Event):void{
@@ -141,8 +128,8 @@ package com.powerflasher.SampleApp {
 			if(setNewTarget){
 				attractiveStaticPoint.X = Math.random() * (mainStage.stageWidth - enemy.width);
 				attractiveStaticPoint.Y = Math.random() * (mainStage.stageHeight - enemy.height);
-				force.multEquals(0.001);
-				trace(attractiveStaticPoint);
+				force.multEquals(0.01);
+//				trace(attractiveStaticPoint);
 			}
 		}	
 	}

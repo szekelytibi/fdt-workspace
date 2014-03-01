@@ -9,7 +9,7 @@ package com.powerflasher.SampleApp {
 		public var gameLevel:int;
 		private var mainStage:Stage;
 		private var spaceShip:SpaceShip;
-		private var enemy:Enemy;
+		private var enemies:Vector.<Enemy> = new Vector.<Enemy>();
 		private var asteroidField0:AsteroidField;
 		private var asteroidField1:AsteroidField;
 		private var asteroidField2:AsteroidField;
@@ -32,7 +32,10 @@ package com.powerflasher.SampleApp {
 			asteroidField2 = new AsteroidField(8, 40, 4, mainStage, null);
 			mainStage.addChild(asteroidField2);
 			
-			enemy = new Enemy(mainStage, spaceShip);
+			for(var i:int = 0; i < 5; i++){
+				var enemy:Enemy = new Enemy(mainStage, spaceShip);
+				enemies.push(enemy);
+			}
 		}
 	}
 }

@@ -43,6 +43,9 @@ package com.powerflasher.SampleApp {
 			numAssets--;
 			if(numAssets == 0){
 				this.stage.addChild(spaceShip);
+				var scale:Number = 0.6;//Math.random();
+				spaceShip.width = spaceShip.width * scale;
+				spaceShip.height = spaceShip.height * scale;
 				spaceShip.y = this.stage.stageHeight/2-spaceShip.height/2;
 			}
 		}
