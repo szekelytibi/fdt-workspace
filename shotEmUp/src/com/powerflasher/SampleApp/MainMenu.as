@@ -23,9 +23,19 @@ package com.powerflasher.SampleApp {
 		private var introMovie:Loader;
 		private var mainStage:Stage;
 		private var game:Game;
+		private static var instance:MainMenu;
 		
-		public function MainMenu(stage:Stage) {
+		public static function open():void{
+			instance.show();
+		}
+		
+		public function MainMenu(stage:Stage){
+			instance = this;
 			mainStage = stage;
+			show();
+		}
+		
+		public function show():void{
 			var x:int = mainStage.stageWidth / 2;
 			var y:int = mainStage.stageHeight / 2;
 			

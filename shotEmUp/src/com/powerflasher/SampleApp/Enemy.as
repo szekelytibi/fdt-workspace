@@ -30,7 +30,7 @@ package com.powerflasher.SampleApp {
 		private const PI2:Number = 3.1415926536*2;
 		public const mass:Number = 100;
 		
-		public static var hitObjs:Vector.<Loader>=new Vector.<Loader>();
+		public static var hitObjs:Vector.<Loader>;
 		
 		public function Enemy(stage:Stage, ship:SpaceShip, shapeRadius:int, shapeElementId:Number) {
 			id = shapeElementId;
@@ -41,6 +41,7 @@ package com.powerflasher.SampleApp {
 			enemy.load(new URLRequest("Enemy.gif"));
 			enemy.contentLoaderInfo.addEventListener(Event.COMPLETE, completeListener);
 			attractiveStaticPoint = new Vector2(mainStage.stageWidth/2, mainStage.stageHeight/2);
+			hitObjs = new Vector.<Loader>();
 		}
 		
 		private function completeListener (e:Event):void {

@@ -37,6 +37,12 @@ package com.powerflasher.SampleApp {
 			addEventListener(Event.ENTER_FRAME,enterFrameHandler);
 		}
 		
+		public function remove():void{
+			for each(var asteroid in asteroids){
+				mainStage.removeChild(asteroid);
+			}
+		}
+		
 		protected function enterFrameHandler(event:Event):void{
 			scrollOffset += scrollSpeed;
 							

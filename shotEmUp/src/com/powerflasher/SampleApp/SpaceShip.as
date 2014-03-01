@@ -42,6 +42,13 @@ package com.powerflasher.SampleApp {
 			addEventListener(Event.ENTER_FRAME,enterFrameHandler);
 			
 		}
+		
+		public function remove():void{
+			mainStage.removeChild(spaceShip);
+			removeEventListener(Event.ENTER_FRAME, enterFrameHandler);
+			mainStage.removeEventListener(KeyboardEvent.KEY_DOWN,keyPressHandler);
+			mainStage.removeEventListener(KeyboardEvent.KEY_UP,keyReleaseHandler);
+		}
 
 		private function assetLoaded(e : Event) : void {
 			numAssets--;
@@ -98,10 +105,11 @@ package com.powerflasher.SampleApp {
 			for each(var enemy:Loader in Enemy.hitObjs) {     
        			if (spaceShip.hitTestObject(enemy)) {
 					var explosion:Explosion = new Explosion(mainStage, enemy.x, enemy.y, 100, 6, 1);
-					mainStage.removeChild(enemy);
-					mainStage.removeChild(spaceShip);
-					removeEventListener(Event.ENTER_FRAME, enterFrameHandler);
-					spaceShip = null;
+					if(enemy.stage){
+						enemy.parent.removeChild(enemy);
+					}
+					remove();
+					Game.finish(false);
 					trace("GAME OVER");
 					return;
         		}

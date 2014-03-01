@@ -46,6 +46,7 @@ package com.powerflasher.SampleApp {
 					destroyMissile = true;
 					explosion = new Explosion(emitter.mainStage, missile.x, missile.y, 100, 3);
 					if(Enemy.hitObjs.length ==0){
+						Game.finish(true);
 						trace("CONGRATULATION !");
 						// WIN GAME ....
 					}
