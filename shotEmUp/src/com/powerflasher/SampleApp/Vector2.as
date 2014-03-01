@@ -89,6 +89,19 @@ package com.powerflasher.SampleApp {
                 {
                         return new Vector2(X * v.X, Y * v.Y);
                 }
+				
+				public function rotateEqual(radian:Number):Vector2{
+						X = X * Math.sin(radian);
+						Y = Y * Math.cos(radian);
+						return this; 
+				}
+				
+				public function rotate(radian:Number):Vector2{
+					
+                        return new Vector2(X * Math.sin(radian), Y * Math.cos(radian));
+				}
+				
+				
 
                 public function perpendicular():Vector2
                 {
@@ -234,5 +247,6 @@ package com.powerflasher.SampleApp {
                 {
                         return ('{X:' + X + " Y:" + Y + '}');
                 }
+				
         }
 }

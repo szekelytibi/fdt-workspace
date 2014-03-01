@@ -32,10 +32,14 @@ package com.powerflasher.SampleApp {
 			asteroidField2 = new AsteroidField(8, 40, 4, mainStage, null);
 			mainStage.addChild(asteroidField2);
 			
-			for(var i:int = 0; i < 5; i++){
-				var enemy:Enemy = new Enemy(mainStage, spaceShip);
+			createEnemies(6, 60);
+		}
+		private function createEnemies(numEnemies:int, shapeRadius:int){
+			for(var i:int = 0; i < numEnemies; i++){
+				var enemy:Enemy = new Enemy(mainStage, spaceShip, shapeRadius,  i / numEnemies);
 				enemies.push(enemy);
 			}
+			
 		}
 	}
 }

@@ -25,9 +25,14 @@ package com.powerflasher.SampleApp {
 		private var attractiveStaticPoints:Vector.<Vector2> = new Vector.<Vector2>();
 		private var attractiveStaticPoint:Vector2;
 		private var spaceShip:Loader;
+		private var id:Number;
+		private var radius:int;
+		private const PI2:Number = 3.1415926536*2;
 		public const mass:Number = 100;
 		
-		public function Enemy(stage:Stage, ship:SpaceShip) {
+		public function Enemy(stage:Stage, ship:SpaceShip, shapeRadius:int, shapeElementId:Number) {
+			id = shapeElementId;
+			radius = shapeRadius;
 			mainStage = stage;
 			spaceShip = ship.spaceShip;
 			enemy = new Loader();
@@ -101,7 +106,9 @@ package com.powerflasher.SampleApp {
 			var scale:Number = 0.2;//Math.random();
 			enemy.width = enemy.width * scale;
 			enemy.height = enemy.height * scale;
-			pos = new Vector2(mainStage.stageWidth-enemy.width, (mainStage.stageHeight-enemy.height)/2);
+			var dPos:Vector2 = new Vector2(radius, radius).rotateEqual(PI2*id);
+			pos = new Vector2((mainStage.stageWidth-enemy.width) - radius, (mainStage.stageHeight-enemy.height)/2);
+			pos.plusEquals(dPos);
 			enemy.x = pos.X;
 			enemy.y = pos.Y;
 			setRandomTarget();
