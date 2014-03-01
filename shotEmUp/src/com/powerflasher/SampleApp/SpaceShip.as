@@ -55,6 +55,7 @@ package com.powerflasher.SampleApp {
 		
 		protected function enterFrameHandler(event:Event):void
 		{
+			
 			if(fire && ((lastFireTime+fireChargeTime) < getTimer())){
 				lastFireTime = getTimer();
 				var missile:Missile = new Missile(this);
@@ -92,6 +93,23 @@ package com.powerflasher.SampleApp {
 			if( spaceShip.x > maxX ){
 				spaceShip.x = maxX;
 			}
+			
+			for each(var enemy:Loader in Enemy.hitObjs) {     
+       			if (spaceShip.hitTestObject(enemy)) {
+					mainStage.removeChild(enemy);
+					var index:int = Enemy.hitObjs.indexOf(enemy);
+					Enemy.hitObjs.splice(index, 1);
+					
+					mainStage.removeChild(spaceShip);
+					removeEventListener(Event.ENTER_FRAME, enterFrameHandler);
+					spaceShip = null;
+					
+					trace("GAME OVER");
+					
+					return;
+        		}
+    		}
+			
 		}
 		
 		protected function keyPressHandler(event:KeyboardEvent):void

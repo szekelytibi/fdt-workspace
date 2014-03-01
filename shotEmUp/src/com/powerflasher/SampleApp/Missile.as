@@ -27,22 +27,34 @@ package com.powerflasher.SampleApp {
 			missile.width = missile.width / 3;
 			missile.height = missile.height / 6;
 			
-			missile.x = emitter.spaceShip.x+emitter.spaceShip.width;
-			missile.y = emitter.spaceShip.y+(emitter.spaceShip.height-missile.height)/2;
-			emitter.mainStage.addChild(missile);
+			if(emitter != null){
+				missile.x = emitter.spaceShip.x+emitter.spaceShip.width;
+				missile.y = emitter.spaceShip.y+(emitter.spaceShip.height-missile.height)/2;
+				emitter.mainStage.addChild(missile);
+			}
 		}
 		
 		protected function enterFrameHandler(event:Event):void{
 			missile.x += speed;
+			var destroyMissile:Boolean = false;
 			for each(var enemy:Loader in Enemy.hitObjs) {     
        			if (missile.hitTestObject(enemy)) {
 					emitter.mainStage.removeChild(enemy);
 					var index:int = Enemy.hitObjs.indexOf(enemy);
 					Enemy.hitObjs.splice(index, 1);
+					destroyMissile = true;
+					
+					if(Enemy.hitObjs.length ==0){
+						trace("CONGRATULATION !");
+						// WIN GAME ....
+					}
         		}
     		}
 			
-			if(emitter.mainStage.stageWidth < missile.x){
+			if(emitter.mainStage.stageWidth < missile.x)
+				destroyMissile = true;
+				
+			if(destroyMissile){
 				emitter.mainStage.removeChild(missile);
 				removeEventListener(Event.ENTER_FRAME, enterFrameHandler);
 				missile = null;
