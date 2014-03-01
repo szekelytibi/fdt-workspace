@@ -16,7 +16,8 @@ package com.powerflasher.SampleApp {
 		private var radius:int;
 		private var numParts:int;
 		private var mainStage:Stage;
-		public function Explosion( stage:Stage, cx:int, cy:int, _radius:int, _numParts:int){
+		private var time:Number;
+		public function Explosion( stage:Stage, cx:int, cy:int, _radius:int, _numParts:int, type:int = 0){
 			mainStage = stage;
 			numParts = _numParts;
 			radius = _radius;
@@ -24,7 +25,16 @@ package com.powerflasher.SampleApp {
 			for(var i:int = 0; i < numParts; i++){
 				var part:ExplosionPart = new ExplosionPart(mainStage);
 				parts.push(part);
-				part.load(new URLRequest("Enemy.gif"));
+				if(type == 1){
+					time = 2000;
+					part.load(new URLRequest("ShipExplosion.gif"));
+				}
+				else{
+					time = 1000;
+					part.load(new URLRequest("EnemyExplosion.gif"));
+				}
+					
+					
 				part.contentLoaderInfo.addEventListener(Event.COMPLETE, completeListener);
 			}
 		}
@@ -37,7 +47,7 @@ package com.powerflasher.SampleApp {
 					part.height = radius/2;
 					var rad:Number = Math.PI*2* i/parts.length;
 					var dir:Vector2 = new Vector2(radius, radius).rotateEqual(rad);
-					part.setParams(center,dir, 10000);
+					part.setParams(center,dir, 1000);
 					mainStage.addChild(part);
 				}
 			}

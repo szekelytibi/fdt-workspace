@@ -70,7 +70,11 @@ package com.powerflasher.SampleApp {
 		}
 		
 		private function calcForce():void{
-			const massOtherDynamic:Number = 5000; 
+			const massOtherDynamic:Number = 1000; 
+			if(attractiveDynamicPoints.length == 0){
+				force = Vector2.Zero;
+				trace("ZERO");
+			}
 			for each(var point:Loader in attractiveDynamicPoints){
 				var pOther:Vector2 = new Vector2(point.x, point.y);
 				var dir:Vector2 = pOther.minus(pos);
@@ -141,6 +145,6 @@ package com.powerflasher.SampleApp {
 				force.multEquals(0.01);
 //				trace(attractiveStaticPoint);
 			}
-		}	
+		}
 	}
 }

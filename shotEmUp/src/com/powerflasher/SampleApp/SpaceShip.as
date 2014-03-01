@@ -26,7 +26,8 @@ package com.powerflasher.SampleApp {
 		private const fireChargeTime:Number = 500;
 		
 		// Animation
-		public var speed:Number = 10;
+		public var hSpeed:Number = 20;
+		public var vSpeed:Number = 10;
 		
 
 		public function SpaceShip(stage:Stage) {
@@ -63,16 +64,16 @@ package com.powerflasher.SampleApp {
 			}
 			// Move up, down, left, or right
 			if( left && !right ) {
-				spaceShip.x -= speed;
+				spaceShip.x -= hSpeed;
 			}
 			if( right && !left ) {
-				spaceShip.x += speed;
+				spaceShip.x += hSpeed;
 			}
 			if( up && !down ) {
-				spaceShip.y -= speed;
+				spaceShip.y -= vSpeed;
 			}
 			if( down && !up ) {
-				spaceShip.y += speed;
+				spaceShip.y += vSpeed;
 			}
 			// Loop to opposite side of the masked 
 			// area when the beetle travels off-screen.
@@ -96,16 +97,12 @@ package com.powerflasher.SampleApp {
 			
 			for each(var enemy:Loader in Enemy.hitObjs) {     
        			if (spaceShip.hitTestObject(enemy)) {
+					var explosion:Explosion = new Explosion(mainStage, enemy.x, enemy.y, 100, 6, 1);
 					mainStage.removeChild(enemy);
-					var index:int = Enemy.hitObjs.indexOf(enemy);
-					Enemy.hitObjs.splice(index, 1);
-					
 					mainStage.removeChild(spaceShip);
 					removeEventListener(Event.ENTER_FRAME, enterFrameHandler);
 					spaceShip = null;
-					
 					trace("GAME OVER");
-					
 					return;
         		}
     		}
