@@ -1,13 +1,10 @@
 package com.powerflasher.SampleApp {
-	import flash.utils.Dictionary;
 	import flash.display.Sprite;
 	import flash.display.Stage;
-	import flash.display.Loader;
 	import flash.text.TextField;
 	import flash.text.TextFormat;
 	import flash.utils.Timer;
 	import flash.events.TimerEvent;
-	import flash.utils.Dictionary;
 
 
 	/**
@@ -29,12 +26,10 @@ package com.powerflasher.SampleApp {
 		public static var instance:Game;
 		public static var massStatic:Sprite;
 		public static var massDynamic:Sprite;
-		public static var enemiesDict:Dictionary;
 		
 		public static const displayMasses:Boolean = false;
 		
 		public function Game(level:int, stage:Stage) {
-			enemiesDict = new Dictionary();
 			instance = this;
 			mainStage = stage;
 			gameLevel = level;

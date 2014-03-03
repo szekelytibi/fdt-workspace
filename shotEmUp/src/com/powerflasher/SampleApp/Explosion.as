@@ -1,6 +1,5 @@
 package com.powerflasher.SampleApp {
 	import flash.display.Sprite;
-	import flash.display.Loader;
 	import flash.net.URLRequest;
 	import flash.events.Event;
 	import flash.display.Stage;
@@ -11,7 +10,6 @@ package com.powerflasher.SampleApp {
 	 */
 	public class Explosion extends Sprite {
 		public var center:Vector2 = Vector2.Zero;
-		private var dir:Vector2 = Vector2.Zero;
 		private var parts:Vector.<ExplosionPart>=new Vector.<ExplosionPart>();
 		private var radius:int;
 		private var numParts:int;

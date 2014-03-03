@@ -8,7 +8,7 @@ package com.powerflasher.SampleApp {
 	 */
 	public class MenuButton extends Sprite {
 		private var text : TextField;
-		private var icon : Image;
+//		private var icon : Image;
 		private var upFormat : TextFormat;
 		private var overFormat : TextFormat;
 

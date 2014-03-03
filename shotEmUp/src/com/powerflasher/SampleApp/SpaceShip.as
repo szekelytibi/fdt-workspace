@@ -75,7 +75,7 @@ package com.powerflasher.SampleApp {
 			
 			if(fire && ((lastFireTime+fireChargeTime) < getTimer())){
 				lastFireTime = getTimer();
-				var missile:Missile = new Missile(this);
+				new Missile(this);
 				fire = false;
 			}
 			// Move up, down, left, or right
@@ -113,7 +113,7 @@ package com.powerflasher.SampleApp {
 			
 			for each(var enemy:Enemy in Game.instance.enemies) {     
        			if (spaceShip.hitTestObject(enemy.enemy)) {
-					var explosion:Explosion = new Explosion(mainStage, enemy.enemy.x, enemy.enemy.y, 100, 10, 1);
+					new Explosion(mainStage, enemy.enemy.x, enemy.enemy.y, 100, 10, 1);
 					
 					remove();
 					Game.instance.killEnemy(enemy);

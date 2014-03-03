@@ -3,14 +3,13 @@ package com.powerflasher.SampleApp {
 	import flash.display.Sprite;
 	import flash.display.Loader;
 	import flash.display.Stage;
-	import flash.display.AVM1Movie;
 	import flash.net.URLRequest;
 	import flash.events.Event;
 	import flash.desktop.NativeApplication;
 	import flash.system.fscommand;
 	import flash.media.SoundMixer;
 	import flash.media.SoundTransform;
-	import flash.display.Bitmap;
+//	import flash.display.Bitmap;
 	
 	
 

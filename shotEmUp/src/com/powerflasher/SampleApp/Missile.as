@@ -1,5 +1,4 @@
 package com.powerflasher.SampleApp {
-	import flash.events.Event;
 	import flash.display.Sprite;
 	import flash.display.Loader;
 	import flash.net.URLRequest;
@@ -11,8 +10,6 @@ package com.powerflasher.SampleApp {
 	public class Missile extends Sprite {
 		private var missile:Loader;
 		private var emitter:SpaceShip;
-		private var initialX:int;
-		private var initialY:int;
 		private const speed:int = 20;
 		private var explosion:Explosion;
 		public static var enemyCount:int = 0;

@@ -1,6 +1,5 @@
 package com.powerflasher.SampleApp {
-	import flash.display.Shape;
-	import flash.utils.Dictionary;
+//	import flash.display.Shape;
 	import flash.utils.getTimer;
 	import flash.events.Event;
 	import flash.display.Sprite;
@@ -14,9 +13,6 @@ package com.powerflasher.SampleApp {
 	public class Enemy extends Sprite {
 		public var enemy:Loader;
 		private var mainStage:Stage;
-		private var nextTargetTime:Number;
-		private var moveSpeed:Number;
-		private var curTargetTime:Number;
 		private var pos:Vector2;
 		private var force:Vector2;
 		private var speed:Vector2;
@@ -48,7 +44,6 @@ package com.powerflasher.SampleApp {
 		
 		private function completeListener (e:Event):void {
         	dispatchEvent(new Event(Event.COMPLETE));
-			Game.enemiesDict[enemy] = this;
 			var scale:Number = 0.2;//Math.random();
 			enemy.width = enemy.width * scale;
 			enemy.height = enemy.height * scale;
@@ -104,7 +99,7 @@ package com.powerflasher.SampleApp {
 			speed.mult(velocity);
 		}
 
-		private function calcPos(dt:Number):void{
+		private function calcPos():void{
 			const border:int = 200;
 			var step:Vector2 = speed.mult(10); 
 			pos.X += step.X;
@@ -132,7 +127,7 @@ package com.powerflasher.SampleApp {
 				setNewTarget();
 			}
 			calcSpeed(dt);
-			calcPos(dt);
+			calcPos();
 			
 			enemy.x = pos.X;
 			enemy.y = pos.Y;
