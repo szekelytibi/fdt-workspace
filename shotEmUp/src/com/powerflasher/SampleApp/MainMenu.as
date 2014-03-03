@@ -1,7 +1,8 @@
 package com.powerflasher.SampleApp {
+	import flash.display.MovieClip;
 	import flash.events.MouseEvent;
 	import flash.display.Sprite;
-	import flash.display.Loader;
+	import flash.display.MovieClip;
 	import flash.display.Stage;
 	import flash.net.URLRequest;
 	import flash.events.Event;
@@ -21,10 +22,13 @@ package com.powerflasher.SampleApp {
 		private var button1:MenuButton;
 		private var button2:MenuButton;
 		private var buttonExit:MenuButton;
-		private var introMovie:Loader;
+		private var introMovie:MovieClip;
 		private var mainStage:Stage;
 		private var game:Game;
 		private static var instance:MainMenu;
+
+		[Embed (source="assets/SpaceShipIntro.swf" )]
+		public static const introMovieAsset:Class;
 		
 		[Embed (source="assets/Logo.gif" )]
 		public static const logoIcon:Class;
@@ -56,16 +60,15 @@ package com.powerflasher.SampleApp {
 			var x:int = mainStage.stageWidth / 2;
 			var y:int = mainStage.stageHeight / 2;
 			
-			introMovie = new Loader();
-			introMovie.contentLoaderInfo.addEventListener(Event.COMPLETE, completeListener);
-			introMovie.load(new URLRequest("SpaceShipIntro.swf"));
+			introMovie = new introMovieAsset() as MovieClip;
 			
+			introMovie.width = mainStage.stageWidth;
+			introMovie.height = mainStage.stageHeight;
 			
-			logo.width *= 0.8;
-			logo.height *= 0.8;
+			logo.width = 280;
+			logo.height = 152;
 			logo.x = x - logo.width/2 - 22;
 			logo.y = 10;
-			
 			
 			button0 = new MenuButton("GAME1", new alien1icon());
 			button0.addEventListener(MouseEvent.CLICK, onSelectGame0);
@@ -79,8 +82,6 @@ package com.powerflasher.SampleApp {
 			buttonExit = new MenuButton("EXIT", new exitIcon());
 			buttonExit.addEventListener(MouseEvent.CLICK, onSelectExit);
 			
-			
-			
 			y -= (button0.height + button1.height + button2.height + buttonExit.height) / 2;
 			
 			button0.setPos(x, y);
@@ -90,23 +91,17 @@ package com.powerflasher.SampleApp {
 			button2.setPos(x, y);
 			y += button2.height;
 			buttonExit.setPos(x, y);
-			
-			
+
+			SoundMixer.soundTransform = new SoundTransform(0.005, 0);;			
+
+			mainStage.addChild(introMovie);
+			mainStage.addChild(button0);
+			mainStage.addChild(button1);
+			mainStage.addChild(button2);
+			mainStage.addChild(buttonExit);
+			mainStage.addChild(logo);
 		}
 		
-		private function completeListener (e:Event):void {
-			introMovie.width = mainStage.stageWidth;
-			introMovie.height = mainStage.stageHeight;
-				
-			this.stage.addChild(introMovie);
-			this.stage.addChild(button0);
-			this.stage.addChild(button1);
-			this.stage.addChild(button2);
-			this.stage.addChild(buttonExit);
-			this.stage.addChild(logo);
-			
-			SoundMixer.soundTransform = new SoundTransform(0.005, 0);;			
-		}
 		
 		private function onSelectGame0 (e:MouseEvent):void {
 			closeMenu();

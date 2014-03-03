@@ -3,7 +3,7 @@ package com.powerflasher.SampleApp {
 	import flash.utils.getTimer;
 	import flash.events.Event;
 	import flash.display.Sprite;
-	import flash.display.Loader;
+	import flash.display.Bitmap;
 	import flash.net.URLRequest;
 	import flash.display.Stage;
 
@@ -11,39 +11,30 @@ package com.powerflasher.SampleApp {
 	 * @author tiborszekely
 	 */
 	public class Enemy extends Sprite {
-		public var enemy:Loader;
+		public var enemy:Bitmap;
 		private var mainStage:Stage;
 		private var pos:Vector2;
 		private var force:Vector2;
 		private var speed:Vector2;
 		private var frameTime:Number = 0;
-		public static var attractiveDynamicPoint:Loader;
+		public static var attractiveDynamicPoint:Bitmap;
 		public static var attractiveStaticPoint:Vector2;
-		private var spaceShip:Loader;
+		private var spaceShip:Bitmap;
 		private var id:Number;
 		private var radius:int;
 		private const PI2:Number = 3.1415926536*2;
 		public const mass:Number = 100;
 		
-//		public static var hitObjs:Vector.<Loader>;
+		[Embed (source="assets/Enemy.gif" )]
+		public static const enemyAsset:Class;
 		
 		public function Enemy(stage:Stage, ship:SpaceShip, shapeRadius:int, shapeElementId:Number) {
 			id = shapeElementId;
 			radius = shapeRadius;
 			mainStage = stage;
 			spaceShip = ship.spaceShip;
-			enemy = new Loader();
-			enemy.load(new URLRequest("Enemy.gif"));
-			enemy.contentLoaderInfo.addEventListener(Event.COMPLETE, completeListener);
-			attractiveStaticPoint = new Vector2(Math.random() * mainStage.stageWidth/2, Math.random() * mainStage.stageHeight);
-			force = new Vector2(0, 0);
-			speed = new Vector2(0, 0);
+			enemy = new enemyAsset();
 			
-//			hitObjs = new Vector.<Loader>();
-		}
-		
-		private function completeListener (e:Event):void {
-        	dispatchEvent(new Event(Event.COMPLETE));
 			var scale:Number = 0.2;//Math.random();
 			enemy.width = enemy.width * scale;
 			enemy.height = enemy.height * scale;
@@ -58,9 +49,12 @@ package com.powerflasher.SampleApp {
 			enemy.y = pos.Y;
 			mainStage.addChild(enemy);
 			attractiveDynamicPoint = spaceShip;
+			attractiveStaticPoint = new Vector2(Math.random() * mainStage.stageWidth/2, Math.random() * mainStage.stageHeight);
+			force = new Vector2(0, 0);
+			speed = new Vector2(0, 0);
+			
 			addEventListener(Event.ENTER_FRAME,enterFrameHandler);
 		}
-		
 		
 		private function calcDynamicForce():void{
 			if(attractiveDynamicPoint){

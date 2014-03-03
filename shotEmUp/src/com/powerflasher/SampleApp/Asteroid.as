@@ -1,10 +1,10 @@
 package com.powerflasher.SampleApp {
-	import flash.display.Loader;
+	import flash.display.Bitmap;
 
 	/**
 	 * @author tiborszekely
 	 */
-	public class Asteroid extends Loader {
+	public class Asteroid extends Bitmap {
 		public var posX:int;
 		private var fieldSize:Number;
 		private var baseOffset:Number;

@@ -1,6 +1,6 @@
 package com.powerflasher.SampleApp {
 	import flash.utils.getTimer;
-	import flash.display.Loader;
+	import flash.display.Bitmap;
 	import flash.events.Event;
 	import flash.display.Stage;
 	import flash.display.BlendMode;
@@ -8,7 +8,7 @@ package com.powerflasher.SampleApp {
 	/**
 	 * @author tiborszekely
 	 */
-	public class ExplosionPart extends Loader {
+	public class ExplosionPart extends Bitmap {
 		private var speed:Vector2;
 		private var pos:Vector2;
 		private var time:Number;

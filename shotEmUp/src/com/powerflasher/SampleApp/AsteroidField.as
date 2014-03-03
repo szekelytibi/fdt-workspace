@@ -1,4 +1,5 @@
 package com.powerflasher.SampleApp {
+	import flash.display.Bitmap;
 	import flash.net.URLRequest;
 	import flash.display.Stage;
 	import flash.events.Event;
@@ -16,24 +17,49 @@ package com.powerflasher.SampleApp {
 		private var fieldSize:Number;
 		private var scrollOffset:Number = 0;
 		private var scale:Number;
+		
+		[Embed (source="assets/Asteroid0.gif" )]
+		public static const asteroid0Asset:Class;
+		[Embed (source="assets/Asteroid1.gif" )]
+		public static const asteroid1Asset:Class;
+		[Embed (source="assets/Asteroid2.gif" )]
+		public static const asteroid2Asset:Class;
+		[Embed (source="assets/Asteroid3.gif" )]
+		public static const asteroid3Asset:Class;
+		[Embed (source="assets/Asteroid4.gif" )]
+		public static const asteroid4Asset:Class;
+		[Embed (source="assets/Asteroid5.gif" )]
+		public static const asteroid5Asset:Class;
+		[Embed (source="assets/Asteroid6.gif" )]
+		public static const asteroid6Asset:Class;
+		[Embed (source="assets/Asteroid7.gif" )]
+		public static const asteroid7Asset:Class;
+		[Embed (source="assets/Asteroid8.gif" )]
+		public static const asteroid8Asset:Class;
+		[Embed (source="assets/Asteroid9.gif" )]
+		public static const asteroid9Asset:Class;
+		
 		public function AsteroidField(areaMul:Number, speed:Number, _scale:Number, stage:Stage, callback:Function = null) {
 			scale = _scale;
 			mainStage = stage;
 			fieldSize = mainStage.stageWidth * areaMul;
 			scrollSpeed = speed;
 			loadingDoneCallback = callback;
-			var urls:Vector.<URLRequest> = Vector.<URLRequest>([new URLRequest("Asteroid0.gif"),new URLRequest("Asteroid1.gif"), new URLRequest("Asteroid2.gif"), new URLRequest("Asteroid3.gif"), new URLRequest("Asteroid4.gif"), new URLRequest("Asteroid5.gif"), new URLRequest("Asteroid6.gif"), new URLRequest("Asteroid7.gif"), new URLRequest("Asteroid8.gif"), new URLRequest("Asteroid9.gif")]);
-//			var urls:Vector.<URLRequest> = Vector.<URLRequest>([new URLRequest("Asteroid0.gif")]);
+			var assets:Vector.<Class> = Vector.<Class>([asteroid0Asset, asteroid1Asset, asteroid2Asset, asteroid3Asset, asteroid4Asset, asteroid5Asset, asteroid6Asset, asteroid7Asset, asteroid8Asset, asteroid9Asset]);
 			asteroids = new Vector.<Asteroid>();
 			var i:int = 0;
 			var fieldOffset:Number = mainStage.stageWidth;
 			loadedAsteroids = 0;
-			for each (var url:URLRequest in urls){
+			for each (var asset:Class in assets){
+				var bmp:Bitmap = new asset();
 				asteroids[i] = new Asteroid(fieldOffset, fieldSize);
-				asteroids[i].load(url);
-				asteroids[i].contentLoaderInfo.addEventListener(Event.COMPLETE, completeListener);
-				i++;
+				asteroids[i].bitmapData = bmp.bitmapData;
+				mainStage.addChild(asteroids[i]);
+				asteroids[i].initPosition(Math.random() * fieldSize, Math.random() * mainStage.stageHeight, scale);
 			}
+			if(loadingDoneCallback != null)
+				loadingDoneCallback();
+			
 			addEventListener(Event.ENTER_FRAME,enterFrameHandler);
 		}
 		

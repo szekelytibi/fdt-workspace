@@ -2,7 +2,7 @@ package com.powerflasher.SampleApp {
 
 	import flash.utils.getTimer;
 	import flash.display.Sprite;
-	import flash.display.Loader;
+	import flash.display.Bitmap;
 	import flash.display.Stage;
 	import flash.net.URLRequest;
 	import flash.events.Event;
@@ -15,7 +15,7 @@ package com.powerflasher.SampleApp {
 	public class SpaceShip extends Sprite {
 		private var numAssets : int = 1;
 		
-		public var spaceShip : Loader;
+		public var spaceShip : Bitmap;
 		public var mainStage:Stage;
 		public var up:Boolean = false;
 		public var down:Boolean = false;
@@ -29,18 +29,23 @@ package com.powerflasher.SampleApp {
 		public var hSpeed:Number = 20;
 		public var vSpeed:Number = 10;
 		
+		[Embed (source="assets/SpaceShip.gif" )]
+		public static const spaceShipAsset:Class;
+		
 
 		public function SpaceShip(stage:Stage) {
 			mainStage = stage;
-			spaceShip = new Loader();
-			spaceShip.load(new URLRequest("SpaceShip.gif"));
-			spaceShip.contentLoaderInfo.addEventListener(Event.COMPLETE, assetLoaded);
+			spaceShip = new spaceShipAsset();
+			mainStage.addChild(spaceShip);
+			var scale:Number = 0.6;//Math.random();
+			spaceShip.width = spaceShip.width * scale;
+			spaceShip.height = spaceShip.height * scale;
+			spaceShip.y = mainStage.stageHeight/2-spaceShip.height/2;
 			
 			mainStage.addEventListener(KeyboardEvent.KEY_DOWN,keyPressHandler);
 			mainStage.addEventListener(KeyboardEvent.KEY_UP,keyReleaseHandler);
 			// Update screen every frame
 			addEventListener(Event.ENTER_FRAME,enterFrameHandler);
-			
 		}
 		
 		public function remove():void{
@@ -48,17 +53,6 @@ package com.powerflasher.SampleApp {
 			removeEventListener(Event.ENTER_FRAME, enterFrameHandler);
 			mainStage.removeEventListener(KeyboardEvent.KEY_DOWN,keyPressHandler);
 			mainStage.removeEventListener(KeyboardEvent.KEY_UP,keyReleaseHandler);
-		}
-
-		private function assetLoaded(e : Event) : void {
-			numAssets--;
-			if(numAssets == 0){
-				this.stage.addChild(spaceShip);
-				var scale:Number = 0.6;//Math.random();
-				spaceShip.width = spaceShip.width * scale;
-				spaceShip.height = spaceShip.height * scale;
-				spaceShip.y = this.stage.stageHeight/2-spaceShip.height/2;
-			}
 		}
 		
 		protected function enterFrameHandler(event:Event):void

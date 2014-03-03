@@ -1,28 +1,21 @@
 package com.powerflasher.SampleApp {
 	import flash.display.Sprite;
-	import flash.display.Loader;
-	import flash.net.URLRequest;
+	import flash.display.Bitmap;
 	import flash.events.Event;
 	
 	/**
 	 * @author tiborszekely
 	 */
 	public class Missile extends Sprite {
-		private var missile:Loader;
+		private var missile:Bitmap;
 		private var emitter:SpaceShip;
 		private const speed:int = 20;
 		private var explosion:Explosion;
 		public static var enemyCount:int = 0;
+		
 		public function Missile(_emitter:SpaceShip) {
 			this.emitter = _emitter;
-			missile = new Loader();
-			missile.load(new URLRequest("SpaceShip.gif"));
-			missile.contentLoaderInfo.addEventListener(Event.COMPLETE, completeListener);
-			addEventListener(Event.ENTER_FRAME,enterFrameHandler);
-		}
-		
-		private function completeListener (e:Event):void {
-        	dispatchEvent(new Event(Event.COMPLETE));
+			missile = new SpaceShip.spaceShipAsset();
 			missile.width = missile.width / 3;
 			missile.height = missile.height / 6;
 			
@@ -31,8 +24,10 @@ package com.powerflasher.SampleApp {
 				missile.y = emitter.spaceShip.y+(emitter.spaceShip.height-missile.height)/2;
 				emitter.mainStage.addChild(missile);
 			}
+			
+			addEventListener(Event.ENTER_FRAME,enterFrameHandler);
 		}
-		
+	
 		protected function enterFrameHandler(event:Event):void{
 			missile.x += speed;
 			var destroyMissile:Boolean = false;
