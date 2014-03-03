@@ -56,10 +56,11 @@ package com.powerflasher.SampleApp {
 				asteroids[i].bitmapData = bmp.bitmapData;
 				mainStage.addChild(asteroids[i]);
 				asteroids[i].initPosition(Math.random() * fieldSize, Math.random() * mainStage.stageHeight, scale);
+				i++;
 			}
 			if(loadingDoneCallback != null)
 				loadingDoneCallback();
-			
+				
 			addEventListener(Event.ENTER_FRAME,enterFrameHandler);
 		}
 		

@@ -2,7 +2,7 @@ package com.powerflasher.SampleApp {
 	import flash.events.Event;
 	import flash.display.Sprite;
 	import flash.display.Bitmap;
-//	import flash.net.URLRequest;
+	import flash.display.StageScaleMode;;
 	import flash.utils.Timer;
 	import flash.events.TimerEvent;
 
@@ -24,6 +24,7 @@ package com.powerflasher.SampleApp {
 		
 		public function Main() {
 			titleImage = new titleAsset();
+			this.stage.scaleMode = StageScaleMode.NO_SCALE;
 			titleImage.width = this.stage.stageWidth;
 			titleImage.height = this.stage.stageHeight;
 			titleImage.alpha = 0;

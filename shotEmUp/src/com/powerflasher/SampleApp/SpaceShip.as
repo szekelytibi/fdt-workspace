@@ -48,6 +48,7 @@ package com.powerflasher.SampleApp {
 			addEventListener(Event.ENTER_FRAME,enterFrameHandler);
 		}
 		
+		
 		public function remove():void{
 			mainStage.removeChild(spaceShip);
 			removeEventListener(Event.ENTER_FRAME, enterFrameHandler);

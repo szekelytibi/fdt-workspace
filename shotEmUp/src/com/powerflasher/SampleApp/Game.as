@@ -33,8 +33,6 @@ package com.powerflasher.SampleApp {
 			instance = this;
 			mainStage = stage;
 			gameLevel = level;
-			asteroidField0 = new AsteroidField(2, 4, 1, mainStage, asteroidLayer0Loaded);
-			mainStage.addChild(asteroidField0);
 			finishTimer.stop();
 			finishTimer.addEventListener(TimerEvent.TIMER, timerHandler);
             finishTimer.addEventListener(TimerEvent.TIMER_COMPLETE, completeHandler);
@@ -43,9 +41,12 @@ package com.powerflasher.SampleApp {
 			enemyTimer.addEventListener(TimerEvent.TIMER, enemyTimerHandler);
             enemyTimer.addEventListener(TimerEvent.TIMER_COMPLETE, enemyTimerCompleteHandler);
 			
-			
 			newTargetTimer.stop();
 			newTargetTimer.addEventListener(TimerEvent.TIMER, newTargetTimerHandler);
+			
+			asteroidField0 = new AsteroidField(2, 4, 1, mainStage, asteroidLayer0Loaded);
+			mainStage.addChild(asteroidField0);
+			
 
 			if(displayMasses){
 				massStatic = new Sprite();
