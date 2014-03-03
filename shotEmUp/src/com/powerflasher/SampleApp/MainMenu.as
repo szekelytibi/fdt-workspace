@@ -10,6 +10,8 @@ package com.powerflasher.SampleApp {
 	import flash.system.fscommand;
 	import flash.media.SoundMixer;
 	import flash.media.SoundTransform;
+	import flash.display.Bitmap;
+	
 	
 
 	/**
@@ -24,6 +26,20 @@ package com.powerflasher.SampleApp {
 		private var mainStage:Stage;
 		private var game:Game;
 		private static var instance:MainMenu;
+		
+		[Embed (source="assets/Logo.gif" )]
+		public static const logo:Class;
+		
+		[Embed (source="assets/Alien1.gif" )]
+		public static const alien1icon:Class;
+		[Embed (source="assets/Alien2.gif" )]
+		public static const alien2icon:Class;
+		[Embed (source="assets/Alien3.gif" )]
+		public static const alien3icon:Class;
+		[Embed (source="assets/ExitIcon.png" )]
+		public static const exitIcon:Class;
+		
+		
 		
 		public static function open():void{
 			instance.show();
@@ -43,16 +59,16 @@ package com.powerflasher.SampleApp {
 			introMovie.contentLoaderInfo.addEventListener(Event.COMPLETE, completeListener);
 			introMovie.load(new URLRequest("SpaceShipIntro.swf"));
 			
-			button0 = new MenuButton("GAME1");
+			button0 = new MenuButton("GAME1", alien1icon);
 			button0.addEventListener(MouseEvent.CLICK, onSelectGame0);
 			
-			button1 = new MenuButton("GAME2");
+			button1 = new MenuButton("GAME2", alien2icon);
 			button1.addEventListener(MouseEvent.CLICK, onSelectGame1);
 			
-			button2 = new MenuButton("GAME3");
+			button2 = new MenuButton("GAME3", alien3icon);
 			button2.addEventListener(MouseEvent.CLICK, onSelectGame2);
 			
-			buttonExit = new MenuButton("EXIT");
+			buttonExit = new MenuButton("EXIT", exitIcon);
 			buttonExit.addEventListener(MouseEvent.CLICK, onSelectExit);
 			
 			
