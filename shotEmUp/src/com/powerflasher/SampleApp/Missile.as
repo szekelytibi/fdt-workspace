@@ -15,6 +15,7 @@ package com.powerflasher.SampleApp {
 		private var initialY:int;
 		private const speed:int = 20;
 		private var explosion:Explosion;
+		public static var enemyCount:int = 0;
 		public function Missile(_emitter:SpaceShip) {
 			this.emitter = _emitter;
 			missile = new Loader();
@@ -38,14 +39,15 @@ package com.powerflasher.SampleApp {
 		protected function enterFrameHandler(event:Event):void{
 			missile.x += speed;
 			var destroyMissile:Boolean = false;
-			for each(var enemy:Loader in Enemy.hitObjs) {     
-       			if (missile.hitTestObject(enemy)) {
-					emitter.mainStage.removeChild(enemy);
-					var index:int = Enemy.hitObjs.indexOf(enemy);
-					Enemy.hitObjs.splice(index, 1);
+			for each(var enemy:Enemy in Game.instance.enemies) {
+				     
+       			if (missile.hitTestObject(enemy.enemy)) {
+					emitter.mainStage.removeChild(enemy.enemy);
+					var index:int = Game.instance.enemies.indexOf(enemy);
+					Game.instance.enemies.splice(index, 1);
 					destroyMissile = true;
 					explosion = new Explosion(emitter.mainStage, missile.x, missile.y, 100, 3);
-					if(Enemy.hitObjs.length ==0){
+					if(enemyCount == 0 && Game.instance.enemies.length == 0){
 						Game.finish(true);
 						trace("CONGRATULATION !");
 						// WIN GAME ....

@@ -1,4 +1,5 @@
 package com.powerflasher.SampleApp {
+	import flash.utils.Dictionary;
 	import flash.display.Sprite;
 	import flash.display.Stage;
 	import flash.display.Loader;
@@ -6,6 +7,7 @@ package com.powerflasher.SampleApp {
 	import flash.text.TextFormat;
 	import flash.utils.Timer;
 	import flash.events.TimerEvent;
+	import flash.utils.Dictionary;
 
 
 	/**
@@ -13,18 +15,24 @@ package com.powerflasher.SampleApp {
 	 */
 	public class Game extends Sprite {
 		public var gameLevel:int;
-		private var mainStage:Stage;
+		public static var mainStage:Stage;
 		private var spaceShip:SpaceShip;
-		private var enemies:Vector.<Enemy> = new Vector.<Enemy>();
+		public var enemies:Vector.<Enemy>;
 		private var asteroidField0:AsteroidField;
 		private var asteroidField1:AsteroidField;
 		private var asteroidField2:AsteroidField;
 		private var text:TextField;
 		private var finishTimer:Timer = new Timer(200, 20);
-		private static var instance:Game;
+		private var newTargetTimer:Timer = new Timer(3000);
+		private var enemyTimer:Timer = new Timer(2000, 10);
 		private var counter:int;
+		public static var instance:Game;
+		public static var massStatic:Sprite;
+		public static var massDynamic:Sprite;
+		public static var enemiesDict:Dictionary;
 		
 		public function Game(level:int, stage:Stage) {
+			enemiesDict = new Dictionary();
 			instance = this;
 			mainStage = stage;
 			gameLevel = level;
@@ -33,6 +41,31 @@ package com.powerflasher.SampleApp {
 			finishTimer.stop();
 			finishTimer.addEventListener(TimerEvent.TIMER, timerHandler);
             finishTimer.addEventListener(TimerEvent.TIMER_COMPLETE, completeHandler);
+			
+			enemyTimer.stop();
+			enemyTimer.addEventListener(TimerEvent.TIMER, enemyTimerHandler);
+            enemyTimer.addEventListener(TimerEvent.TIMER_COMPLETE, enemyTimerCompleteHandler);
+			
+			
+			newTargetTimer.stop();
+			newTargetTimer.addEventListener(TimerEvent.TIMER, newTargetTimerHandler);
+			
+			massStatic = new Sprite();
+			massStatic.graphics.beginFill(0xFFCC00);
+			massStatic.graphics.drawCircle(20, 20, 20);
+			
+			massDynamic = new Sprite();
+			massDynamic.graphics.beginFill(0xFF00CC);
+			massDynamic.graphics.drawCircle(20, 20, 20);
+			
+			massDynamic.x = 100;
+			massDynamic.y = 200;
+			
+			massStatic.x = 400;
+			massStatic.y = 200;
+			
+			mainStage.addChild(massDynamic);
+			mainStage.addChild(massStatic);
 		}
 		
 		public static function finish(isWinner:Boolean):void{
@@ -50,30 +83,36 @@ package com.powerflasher.SampleApp {
 				text.text = "GAME OVER";
 				spaceShip = null;
 			}
+			enemyTimer.stop();
+			removeEventListener(TimerEvent.TIMER, enemyTimerHandler);
+            removeEventListener(TimerEvent.TIMER_COMPLETE, enemyTimerCompleteHandler);
 			text.x = (mainStage.stageWidth-text.textWidth)/2;
 			text.y = (mainStage.stageHeight)/2;
 			text.width = text.textWidth;
 			mainStage.addChild(text);
+			newTargetTimer.stop();
 			finishTimer.start();
+			mainStage.removeChild(massStatic);
+			mainStage.removeChild(massDynamic);
+			killEnemies();
 		}
 		
 		private function removeEnemies():void{
 			if(enemies){
-				for each(var enemy:Loader in Enemy.hitObjs){
-					if(enemy.stage)
-						enemy.parent.removeChild(enemy);
-				}
-				enemies = null;
+				killEnemies();
+				Enemy.attractiveDynamicPoint = null;
 			}
 		}
 		
+		private function newTargetTimerHandler(e:TimerEvent):void{
+			Enemy.setNewTarget();
+        }
+		
+		
 		private function timerHandler(e:TimerEvent):void{
 			counter++;
-//			trace(counter);
 			
 			text.visible = counter % 2 == 0;
-//			var color:int = Math.random() * 0xffffff;
-//			text.defaultTextFormat = new TextFormat("_sans", 48, color, true);
 			e.updateAfterEvent();
         }
 
@@ -100,25 +139,48 @@ package com.powerflasher.SampleApp {
 			
 			asteroidField2 = new AsteroidField(8, 40, 4, mainStage, null);
 			mainStage.addChild(asteroidField2);
+			enemies = new Vector.<Enemy>();
 			switch(gameLevel){
 				case 0:
-					createEnemies(3, 60);
+					createEnemies(1, 60);
+					enemyTimer.start();
+					Missile.enemyCount = 10;
 					break;
 				case 1:
-					createEnemies(9, 80);
+					createEnemies(10, 80);
+					Missile.enemyCount = 0;
 					break;
 				case 2:
 					createEnemies(6, 60);
 					createEnemies(10, 120);
+					Missile.enemyCount = 0;
 					break;
 			}
+			newTargetTimer.start();
 		}
+		
 		private function createEnemies(numEnemies:int, shapeRadius:int):void{
 			for(var i:int = 0; i < numEnemies; i++){
 				var enemy:Enemy = new Enemy(mainStage, spaceShip, shapeRadius,  i / numEnemies);
 				enemies.push(enemy);
 			}
-			
 		}
+		
+		public function killEnemies(){
+			for each(var enemy:Enemy in enemies){
+				enemy.kill();
+			}
+			enemies = new Vector.<Enemy>();
+		}
+		
+		private function enemyTimerHandler(e:TimerEvent):void{
+			createEnemies(1, 0);
+        }
+
+        private function enemyTimerCompleteHandler(e:TimerEvent):void {
+			Game.finish(true);
+			trace("CONGRATULATION !");
+        }
+		
 	}
 }
