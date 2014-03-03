@@ -9,7 +9,7 @@ package com.powerflasher.SampleApp {
 	import flash.system.fscommand;
 	import flash.media.SoundMixer;
 	import flash.media.SoundTransform;
-//	import flash.display.Bitmap;
+	import flash.display.Bitmap;
 	
 	
 
@@ -27,7 +27,7 @@ package com.powerflasher.SampleApp {
 		private static var instance:MainMenu;
 		
 		[Embed (source="assets/Logo.gif" )]
-		public static const logo:Class;
+		public static const logoIcon:Class;
 		
 		[Embed (source="assets/Alien1.gif" )]
 		public static const alien1icon:Class;
@@ -37,6 +37,8 @@ package com.powerflasher.SampleApp {
 		public static const alien3icon:Class;
 		[Embed (source="assets/ExitIcon.png" )]
 		public static const exitIcon:Class;
+		
+		private var logo:Bitmap = new logoIcon();
 		
 		
 		
@@ -58,16 +60,23 @@ package com.powerflasher.SampleApp {
 			introMovie.contentLoaderInfo.addEventListener(Event.COMPLETE, completeListener);
 			introMovie.load(new URLRequest("SpaceShipIntro.swf"));
 			
-			button0 = new MenuButton("GAME1", alien1icon);
+			
+			logo.width *= 0.8;
+			logo.height *= 0.8;
+			logo.x = x - logo.width/2 - 22;
+			logo.y = 10;
+			
+			
+			button0 = new MenuButton("GAME1", new alien1icon());
 			button0.addEventListener(MouseEvent.CLICK, onSelectGame0);
 			
-			button1 = new MenuButton("GAME2", alien2icon);
+			button1 = new MenuButton("GAME2", new alien2icon());
 			button1.addEventListener(MouseEvent.CLICK, onSelectGame1);
 			
-			button2 = new MenuButton("GAME3", alien3icon);
+			button2 = new MenuButton("GAME3", new alien3icon());
 			button2.addEventListener(MouseEvent.CLICK, onSelectGame2);
 			
-			buttonExit = new MenuButton("EXIT", exitIcon);
+			buttonExit = new MenuButton("EXIT", new exitIcon());
 			buttonExit.addEventListener(MouseEvent.CLICK, onSelectExit);
 			
 			
@@ -81,6 +90,8 @@ package com.powerflasher.SampleApp {
 			button2.setPos(x, y);
 			y += button2.height;
 			buttonExit.setPos(x, y);
+			
+			
 		}
 		
 		private function completeListener (e:Event):void {
@@ -92,6 +103,7 @@ package com.powerflasher.SampleApp {
 			this.stage.addChild(button1);
 			this.stage.addChild(button2);
 			this.stage.addChild(buttonExit);
+			this.stage.addChild(logo);
 			
 			SoundMixer.soundTransform = new SoundTransform(0.005, 0);;			
 		}
@@ -128,6 +140,7 @@ package com.powerflasher.SampleApp {
 			this.stage.removeChild(button1);
 			this.stage.removeChild(button2);
 			this.stage.removeChild(buttonExit);
+			this.stage.removeChild(logo);
 		}
 		
 	}

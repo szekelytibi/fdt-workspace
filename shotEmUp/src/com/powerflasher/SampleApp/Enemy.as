@@ -62,7 +62,6 @@ package com.powerflasher.SampleApp {
 		}
 		
 		
-		
 		private function calcDynamicForce():void{
 			if(attractiveDynamicPoint){
 				const massOtherDynamic:Number = 300; 

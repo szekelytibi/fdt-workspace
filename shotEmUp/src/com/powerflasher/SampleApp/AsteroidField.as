@@ -38,7 +38,7 @@ package com.powerflasher.SampleApp {
 		}
 		
 		public function remove():void{
-			for each(var asteroid in asteroids){
+			for each(var asteroid:Asteroid in asteroids){
 				mainStage.removeChild(asteroid);
 			}
 		}
