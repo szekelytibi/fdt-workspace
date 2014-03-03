@@ -40,8 +40,8 @@ package com.powerflasher.SampleApp {
 				this.alpha = 1-factor;
 				this.width = startWidth*(1+5*factor);
 				this.height = startHeight*(1+5*factor);
-				this.x = pos.X;
-				this.y = pos.Y;
+				this.x = pos.X-this.width/2;
+				this.y = pos.Y-this.height/2;
 			}
 			else{
 				mainStage.removeChild(this);

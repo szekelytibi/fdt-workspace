@@ -63,13 +63,15 @@ package com.powerflasher.SampleApp {
 		
 		protected function enterFrameHandler(event:Event):void
 		{
-			if(Enemy.attractiveDynamicPoint){
-				Game.massDynamic.x = Enemy.attractiveDynamicPoint.x;
-				Game.massDynamic.y = Enemy.attractiveDynamicPoint.y;
-			}
+			if(Game.displayMasses){
+				if(Enemy.attractiveDynamicPoint){
+					Game.massDynamic.x = Enemy.attractiveDynamicPoint.x;
+					Game.massDynamic.y = Enemy.attractiveDynamicPoint.y;
+				}
 			
-			Game.massStatic.x = Enemy.attractiveStaticPoint.X;
-			Game.massStatic.y = Enemy.attractiveStaticPoint.Y;
+				Game.massStatic.x = Enemy.attractiveStaticPoint.X;
+				Game.massStatic.y = Enemy.attractiveStaticPoint.Y;
+			}
 			
 			if(fire && ((lastFireTime+fireChargeTime) < getTimer())){
 				lastFireTime = getTimer();
@@ -111,11 +113,10 @@ package com.powerflasher.SampleApp {
 			
 			for each(var enemy:Enemy in Game.instance.enemies) {     
        			if (spaceShip.hitTestObject(enemy.enemy)) {
-					enemy.kill();
-					if(enemy.stage){
-						enemy.parent.removeChild(enemy);
-					}
-//					remove();
+					var explosion:Explosion = new Explosion(mainStage, enemy.enemy.x, enemy.enemy.y, 100, 10, 1);
+					
+					remove();
+					Game.instance.killEnemy(enemy);
 					Game.finish(false);
 					trace("GAME OVER");
 					return;

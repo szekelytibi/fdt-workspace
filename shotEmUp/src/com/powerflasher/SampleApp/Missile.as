@@ -42,9 +42,7 @@ package com.powerflasher.SampleApp {
 			for each(var enemy:Enemy in Game.instance.enemies) {
 				     
        			if (missile.hitTestObject(enemy.enemy)) {
-					emitter.mainStage.removeChild(enemy.enemy);
-					var index:int = Game.instance.enemies.indexOf(enemy);
-					Game.instance.enemies.splice(index, 1);
+					Game.instance.killEnemy(enemy);
 					destroyMissile = true;
 					explosion = new Explosion(emitter.mainStage, missile.x, missile.y, 100, 3);
 					if(enemyCount == 0 && Game.instance.enemies.length == 0){

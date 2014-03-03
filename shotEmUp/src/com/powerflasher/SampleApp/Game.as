@@ -31,6 +31,8 @@ package com.powerflasher.SampleApp {
 		public static var massDynamic:Sprite;
 		public static var enemiesDict:Dictionary;
 		
+		public static const displayMasses:Boolean = false;
+		
 		public function Game(level:int, stage:Stage) {
 			enemiesDict = new Dictionary();
 			instance = this;
@@ -49,23 +51,25 @@ package com.powerflasher.SampleApp {
 			
 			newTargetTimer.stop();
 			newTargetTimer.addEventListener(TimerEvent.TIMER, newTargetTimerHandler);
+
+			if(displayMasses){
+				massStatic = new Sprite();
+				massStatic.graphics.beginFill(0xFFCC00);
+				massStatic.graphics.drawCircle(20, 20, 20);
+				
+				massDynamic = new Sprite();
+				massDynamic.graphics.beginFill(0xFF00CC);
+				massDynamic.graphics.drawCircle(20, 20, 20);
+				
+				massDynamic.x = 100;
+				massDynamic.y = 200;
+				
+				massStatic.x = 400;
+				massStatic.y = 200;
+				mainStage.addChild(massDynamic);
+				mainStage.addChild(massStatic);
+			}
 			
-			massStatic = new Sprite();
-			massStatic.graphics.beginFill(0xFFCC00);
-			massStatic.graphics.drawCircle(20, 20, 20);
-			
-			massDynamic = new Sprite();
-			massDynamic.graphics.beginFill(0xFF00CC);
-			massDynamic.graphics.drawCircle(20, 20, 20);
-			
-			massDynamic.x = 100;
-			massDynamic.y = 200;
-			
-			massStatic.x = 400;
-			massStatic.y = 200;
-			
-			mainStage.addChild(massDynamic);
-			mainStage.addChild(massStatic);
 		}
 		
 		public static function finish(isWinner:Boolean):void{
@@ -92,16 +96,11 @@ package com.powerflasher.SampleApp {
 			mainStage.addChild(text);
 			newTargetTimer.stop();
 			finishTimer.start();
-			mainStage.removeChild(massStatic);
-			mainStage.removeChild(massDynamic);
-			killEnemies();
-		}
-		
-		private function removeEnemies():void{
-			if(enemies){
-				killEnemies();
-				Enemy.attractiveDynamicPoint = null;
+			if(Game.displayMasses){
+				mainStage.removeChild(massStatic);
+				mainStage.removeChild(massDynamic);
 			}
+			killEnemies();
 		}
 		
 		private function newTargetTimerHandler(e:TimerEvent):void{
@@ -123,8 +122,7 @@ package com.powerflasher.SampleApp {
 			asteroidField0.remove();
 			asteroidField1.remove();
 			asteroidField2.remove();
-			if(enemies)
-				removeEnemies();
+			killEnemies();
 			MainMenu.open();
         }
 		
@@ -166,11 +164,17 @@ package com.powerflasher.SampleApp {
 			}
 		}
 		
-		public function killEnemies(){
+		public function killEnemies():void{
 			for each(var enemy:Enemy in enemies){
-				enemy.kill();
+				enemy.remove();
 			}
 			enemies = new Vector.<Enemy>();
+		}
+		
+		public function killEnemy(enemy:Enemy):void{
+			enemy.remove();
+			var index:int = Game.instance.enemies.indexOf(enemy);
+			Game.instance.enemies.splice(index, 1);
 		}
 		
 		private function enemyTimerHandler(e:TimerEvent):void{

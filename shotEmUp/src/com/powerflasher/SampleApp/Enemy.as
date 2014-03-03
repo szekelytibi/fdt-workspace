@@ -39,7 +39,7 @@ package com.powerflasher.SampleApp {
 			enemy = new Loader();
 			enemy.load(new URLRequest("Enemy.gif"));
 			enemy.contentLoaderInfo.addEventListener(Event.COMPLETE, completeListener);
-			attractiveStaticPoint = new Vector2(mainStage.stageWidth/2, mainStage.stageHeight/2);
+			attractiveStaticPoint = new Vector2(Math.random() * mainStage.stageWidth/2, Math.random() * mainStage.stageHeight);
 			force = new Vector2(0, 0);
 			speed = new Vector2(0, 0);
 			
@@ -62,7 +62,6 @@ package com.powerflasher.SampleApp {
 			enemy.x = pos.X;
 			enemy.y = pos.Y;
 			mainStage.addChild(enemy);
-//			hitObjs.push(enemy);
 			attractiveDynamicPoint = spaceShip;
 			addEventListener(Event.ENTER_FRAME,enterFrameHandler);
 		}
@@ -140,8 +139,11 @@ package com.powerflasher.SampleApp {
 			
 		}
 		
-		public function kill():void{
+		public function remove():void{
 			removeEventListener(Event.ENTER_FRAME,enterFrameHandler);
+			if(this.enemy)
+				Game.mainStage.removeChild(this.enemy);
+			this.enemy = null;
 		}
 		
 		public static function setNewTarget():void{
