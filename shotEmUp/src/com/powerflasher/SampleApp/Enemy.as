@@ -19,11 +19,14 @@ package com.powerflasher.SampleApp {
 		private var frameTime:Number = 0;
 		public static var attractiveDynamicPoint:Bitmap;
 		public static var attractiveStaticPoint:Vector2;
+		private var dPos:Vector2
 		private var spaceShip:Bitmap;
 		private var id:Number;
 		private var radius:int;
 		private const PI2:Number = 3.1415926536*2;
+		
 		public const mass:Number = 100;
+		
 		
 		[Embed (source="assets/Enemy.gif" )]
 		public static const enemyAsset:Class;
@@ -38,11 +41,12 @@ package com.powerflasher.SampleApp {
 			var scale:Number = 0.2;//Math.random();
 			enemy.width = enemy.width * scale;
 			enemy.height = enemy.height * scale;
-			if(radius == 0){
-				var dPos:Vector2 = new Vector2(radius, radius).rotateEqual(PI2*id);
+			if(radius != 0){
+				dPos = new Vector2(radius, radius).rotateEqual(PI2*id);
 				pos = dPos.plus(new Vector2((mainStage.stageWidth-enemy.width) - radius, (mainStage.stageHeight-enemy.height)/2));
 			}
 			else{
+				dPos = Vector2.Zero;
 				pos = new Vector2(mainStage.stageWidth + 100, Math.random() * mainStage.stageHeight);
 			}
 			enemy.x = pos.X;
@@ -71,7 +75,7 @@ package com.powerflasher.SampleApp {
 		
 		private function calcStaticForce():Boolean{
 			const massOtherStatic:Number = 1000; 
-			var pOther:Vector2 = attractiveStaticPoint;
+			var pOther:Vector2 = attractiveStaticPoint.plus(dPos);
 			var dir:Vector2 = pOther.minus(pos);
 			var r2:Number = dir.length();
 			var F:Number = (mass*massOtherStatic)/r2;
@@ -137,6 +141,7 @@ package com.powerflasher.SampleApp {
 		public static function setNewTarget():void{
 			attractiveStaticPoint.X = Math.random() * (Game.mainStage.stageWidth);
 			attractiveStaticPoint.Y = Math.random() * (Game.mainStage.stageHeight);
+			
 		}
 	}
 }

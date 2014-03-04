@@ -24,7 +24,6 @@ package com.powerflasher.SampleApp {
 		
 		public function Main() {
 			titleImage = new titleAsset();
-			this.stage.scaleMode = StageScaleMode.NO_SCALE;
 			titleImage.width = this.stage.stageWidth;
 			titleImage.height = this.stage.stageHeight;
 			titleImage.alpha = 0;

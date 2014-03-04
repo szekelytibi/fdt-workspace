@@ -77,7 +77,7 @@ package com.powerflasher.SampleApp {
 			text.defaultTextFormat = new TextFormat("_sans", 64, 0xffffff, true);
 			if(isWinner){
 				text.text = "CONGRATULATION";
-				enemies = null;
+//				enemies = null;
 			}
 			else{
 				text.text = "GAME OVER";
